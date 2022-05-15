@@ -253,23 +253,26 @@ class Export:
         valid_char="[A-Za-z0-9_]"
         has_error="no"
 
-        filename=self.filename_entry.get()
+        filename = self.filename_entry.get()
         print(filename)
 
         for letter in filename:
-            if re.match(valid_char,letter):
+            if re.match(valid_char, letter):
                 continue
-            elif letter == "":
-                problem="(no spaces allowed)"
-            else:
-                problem=("(no {}'s allowed)".format(letter))
-            has_error="yes"
-            break
-        if filename=="":
-            problem="can't be blank"
-            has_error="yes"
 
-        if has_error=="yes":
+            elif letter == " ":
+                problem = "(no spaces allowed)"
+
+            else:
+                problem = ("(no {}'s allowed)".format(letter))
+            has_error = "yes"
+            break
+
+        if filename == "":
+            problem = "can't be blank"
+            has_error = "yes"
+
+        if has_error == "yes":
             #display error message
             self.save_error_label.config(text="Invalid filename - {}".format(problem))
             #Change entry box
@@ -279,7 +282,7 @@ class Export:
         else:
             #if there are no errors, generate text file nd then close dialogue
             #add .txt suffix
-            filename=filename+".txt"
+            filename = filename+".txt"
 
             #create file to hold data
             f = open(filename, "w+")
@@ -289,7 +292,7 @@ class Export:
 
             #Game Stats
             for round in game_stats:
-                f.write(round + "\n")
+                f.write('{}'.format(round) + "\n")
 
             #Heading for Rounds
             f.write("\nRound Details\n\n")
