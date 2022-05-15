@@ -638,7 +638,7 @@ class Export:
 
             #Game Stats
             for round in game_stats:
-                f.write(round + "\n")
+                f.write('{}'.format(round) + "\n")
 
             #Heading for Rounds
             f.write("\nRound Details\n\n")
